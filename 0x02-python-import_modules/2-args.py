@@ -2,7 +2,7 @@
 from sys import argv
 def args():
     if len(argv) == 1:
-        print("0 arguments.")
+        print("{} arguments.".format(0))
     elif len(argv) == 2:
         print("1 argument:\n1: {}".format(argv[1]))
     else:
