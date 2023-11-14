@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 <<<<<<< HEAD
-"""a script that lists all states from the database hbtn_0e_0_usa"""
+'''
+a script that lists all states from the database hbtn_0e_0_usa
+'''
 
 if __name__ == '__main__':
 
@@ -16,7 +18,9 @@ if __name__ == '__main__':
     for row in rows:
         print(row)
 =======
-"""lists all states from the database"""
+'''
+lists all states from the database
+'''
 import MySQLdb
 from sys import argv
 
