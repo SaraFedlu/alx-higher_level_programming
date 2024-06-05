@@ -20,21 +20,28 @@ request(movieApiUrl, (error, response, body) => {
     const movie = JSON.parse(body);
     const characterUrls = movie.characters;
 
-    characterUrls.forEach(url => {
-      request(url, (charError, charResponse, charBody) => {
-        if (charError) {
-          console.error(charError);
-          return;
-        }
-
-        if (charResponse.statusCode === 200) {
-          const character = JSON.parse(charBody);
-          console.log(character.name);
-        } else {
-          console.error(`Error: Received status code ${charResponse.statusCode} for character URL ${url}`);
-        }
+    const characterPromises = characterUrls.map(url => {
+      return new Promise((resolve, reject) => {
+        request(url, (charError, charResponse, charBody) => {
+          if (charError) {
+            reject(charError);
+          } else if (charResponse.statusCode !== 200) {
+            reject(`Error: Received status code ${charResponse.statusCode} for character URL ${url}`);
+          } else {
+            resolve(JSON.parse(charBody).name);
+          }
+        });
       });
     });
+
+    Promise.all(characterPromises)
+      .then(characterNames => {
+        characterNames.forEach(name => console.log(name));
+      })
+      .catch(err => {
+        console.error(err);
+        process.exit(1);
+      });
   } else {
     console.error(`Error: Received status code ${response.statusCode} for movie ID ${movieId}`);
     process.exit(1);
