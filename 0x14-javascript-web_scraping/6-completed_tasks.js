@@ -28,7 +28,7 @@ request(apiUrl, (error, response, body) => {
     });
     const formattedOutput = {};
     for (const userId in completedTasks) {
-      if (completedTasks.hasOwnProperty(userId)) {
+      if (Object.prototype.hasOwnProperty.call(completedTasks, userId)) {
         formattedOutput[userId] = completedTasks[userId];
       }
     }
