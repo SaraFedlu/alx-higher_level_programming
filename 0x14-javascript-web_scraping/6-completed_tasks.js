@@ -29,7 +29,7 @@ request(apiUrl, (error, response, body) => {
     console.log('{');
     for (const userId in completedTasks) {
       if (completedTasks.hasOwnProperty(userId)) {
-        console.log(`${userId}: ${completedTasks[userId]}`);
+        console.log(`'${userId}': ${completedTasks[userId]}`,);
       }
     }
     ocnsole.log('}')
