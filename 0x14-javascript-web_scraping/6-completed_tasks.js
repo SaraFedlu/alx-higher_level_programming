@@ -26,13 +26,13 @@ request(apiUrl, (error, response, body) => {
         completedTasks[todo.userId]++;
       }
     });
-    console.log('{');
+    const formattedOutput = {};
     for (const userId in completedTasks) {
       if (completedTasks.hasOwnProperty(userId)) {
-        console.log(`'${userId}': ${completedTasks[userId]}`,);
+        formattedOutput[userId] = completedTasks[userId];
       }
     }
-    ocnsole.log('}')
+    console.log(JSON.stringify(formattedOutput));
   } else {
     console.error(`Error: Received status code ${response.statusCode}`);
     process.exit(1);
